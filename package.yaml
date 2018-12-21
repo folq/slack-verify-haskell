@@ -8,6 +8,7 @@ copyright:           "2018 Kyung Mo Kweon"
 
 extra-source-files:
 - README.md
+- CHANGELOG.md
 - LICENSE
 
 # Metadata used when publishing your package
@@ -22,7 +23,6 @@ description:         Please see the README on GitHub at <https://github.com/kkwe
 dependencies:
 - base >= 4.7 && < 5
 - bytestring
-- text
 - cryptonite
 - base16-bytestring
 
