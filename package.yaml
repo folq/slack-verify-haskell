@@ -1,0 +1,42 @@
+name:                slack-verify
+version:             0.1.0.0
+github:              "kkweon/slack-verify-haskell"
+license:             BSD3
+author:              "Kyung Mo Kweon"
+maintainer:          "kkweon@gmaill.com"
+copyright:           "2018 Kyung Mo Kweon"
+
+extra-source-files:
+- README.md
+- LICENSE
+
+# Metadata used when publishing your package
+synopsis:            Slack API Request Verification HMAC
+category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/kkweon/slack-verify-haskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- bytestring
+- text
+- cryptonite
+- base16-bytestring
+
+library:
+  source-dirs: src
+
+tests:
+  slack-verify-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - slack-verify
+    - hspec
