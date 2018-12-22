@@ -1,4 +1,7 @@
 # slack-verify
+[![Build Status](https://travis-ci.com/kkweon/slack-verify-haskell.svg?branch=master)](https://travis-ci.com/kkweon/slack-verify-haskell)
+[![Coverage Status](https://coveralls.io/repos/github/kkweon/slack-verify-haskell/badge.svg?branch=master)](https://coveralls.io/github/kkweon/slack-verify-haskell?branch=master)
+[![Hacckage Version](https://img.shields.io/hackage/v/slack-verify.svg)](https://github.com/kkweon/slack-verify-haskell)
 
 ## Get Started
 

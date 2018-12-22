@@ -16,6 +16,10 @@ cache:
   directories:
   - $HOME/.stack
 
+env:
+  - GHCVER=8.4.4 STACK_YAML=stack.yaml
+
+
 # Ensure necessary system libraries are present
 addons:
   apt:
@@ -34,4 +38,9 @@ install:
 
 script:
 # Build the package, its tests, and its docs and run the tests
-- stack --no-terminal test --haddock --no-haddock-deps
+- stack --no-terminal test --haddock --no-haddock-deps --coverage
+
+
+after_script:
+  - travis_retry curl -L https://github.com/rubik/stack-hpc-coveralls/releases/download/v0.0.4.0/shc-linux-x64-$GHCVER.tar.bz2 | tar -xj
+  - ./shc slack-verify slack-verify-test

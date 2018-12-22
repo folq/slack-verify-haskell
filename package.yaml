@@ -1,7 +1,7 @@
 name:                slack-verify
 version:             0.1.0.0
 github:              "kkweon/slack-verify-haskell"
-license:             BSD3
+license:             MIT
 author:              "Kyung Mo Kweon"
 maintainer:          "kkweon@gmaill.com"
 copyright:           "2018 Kyung Mo Kweon"
@@ -22,9 +22,9 @@ description:         Please see the README on GitHub at <https://github.com/kkwe
 
 dependencies:
 - base >= 4.7 && < 5
-- bytestring
-- cryptonite
-- base16-bytestring
+- bytestring >= 0.10
+- cryptonite >= 0.25
+- base16-bytestring >= 0.1
 
 library:
   source-dirs: src
