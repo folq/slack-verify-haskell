@@ -1,46 +1,32 @@
-# This is the simple Travis configuration, which is intended for use
-# on applications which do not require cross-platform and
-# multiple-GHC-version support. For more information and other
-# options, see:
-#
-# https://docs.haskellstack.org/en/stable/travis_ci/
-#
-# Copy these contents into the root directory of your Github project in a file
-# named .travis.yml
-
-# Do not choose a language; we provide our own build tools.
 language: generic
-
-# Caching so the next build will be fast too.
 cache:
   directories:
-  - $HOME/.stack
-
+  - "$HOME/.stack"
 env:
-  - GHCVER=8.4.4 STACK_YAML=stack.yaml
-
-
-# Ensure necessary system libraries are present
+- GHCVER=8.4.4 STACK_YAML=stack.yaml
 addons:
   apt:
     packages:
-      - libgmp-dev
-
+    - libgmp-dev
 before_install:
-# Download and unpack the stack executable
 - mkdir -p ~/.local/bin
 - export PATH=$HOME/.local/bin:$PATH
-- travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
-
+- travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar
+  xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 install:
-# Build dependencies
 - stack --no-terminal --install-ghc test --only-dependencies
-
 script:
-# Build the package, its tests, and its docs and run the tests
 - stack --no-terminal test --haddock --no-haddock-deps --coverage
-
-
 after_script:
-  - travis_retry curl -L https://github.com/rubik/stack-hpc-coveralls/releases/download/v0.0.4.0/shc-linux-x64-$GHCVER.tar.bz2 | tar -xj
-  - ./shc slack-verify slack-verify-test
+- travis_retry curl -L https://github.com/rubik/stack-hpc-coveralls/releases/download/v0.0.4.0/shc-linux-x64-$GHCVER.tar.bz2
+  | tar -xj
+- "./shc slack-verify slack-verify-test"
+
+deploy:
+  provider: hackage
+  username: kkweon
+  password:
+    secure: KHd4W2MLD/HYyr7MhHbZR64PssZANhPQsogSoPoAuawRLRo1uzIPuVTOKkQkC8p7oY1HwJ6kv8jbOJC6SPMZRe04YxvMaFwrT7so+sohW2cx6TS1VBOWUqZbjOKQgKmZCp6JLVRQr+mtKfJXVskLjAKDwLFhp8/yfbFzegkDqHJ1ph2Q0upL8KEZ/RGhmc0iDxntd7WC01TJG5GDexBR2mnVg685YKxgzBXGAUrk8y9NJn81p3K2VeGOGTuY2J3x2e1YJBxFqpORr4xm8CrFNVCx+/mWSr9i9UvVPHyBiKhGfypHsK7WOPbvUUoHnms3B2YTHddkM6xPdy8cSmQPcyN+YEp+s06mk6swwOQGWtGuEosHL7r4ZqRWZrvFE2CZ/7zspM2L9FlPHfQJVzhc/ncrzKJTwBBHI7DPSFJ30DwTGuP7c8l3+e2U8bxWLTlY8Kw7dAHhf2zK0rEr1xguPVx3ngzxwe1VOsxbh3cuS3WM2f5AL1Uq9Ddn7nnKgpkV+Jv1NTi72xHbrEdS1MxUywIE+IKtoKD7kq7F8bTz/me2JnLWBqXGjWi4MssDt2oruVCzg5UyaXNxHijZLOgSoayg6h4Sb+WcUN1qTzJXpeyvLhj3UNdfHbwHUzH5C2eEgaa9eeKfsXm0Ys6rA6UCnFaJYNR0WS8VFfBUnb0OFY4=
+  on:
+    repo: kkweon/slack-verify-haskell
+    branch: master
