@@ -4,7 +4,6 @@ cache:
   - "$HOME/.stack"
 env:
 - GHCVER=8.4.4 STACK_YAML=stack.yaml
-
 addons:
   apt:
     packages:
@@ -19,9 +18,9 @@ install:
 script:
 - stack --no-terminal test --haddock --no-haddock-deps --coverage
 after_script:
-- travis_retry curl -L https://github.com/rubik/stack-hpc-coveralls/releases/download/v0.0.4.0/shc-linux-x64-8.0.1.tar.bz2 | tar -xj
-- ./shc slack-verify slack-verify-test
-
+- travis_retry curl -L https://github.com/rubik/stack-hpc-coveralls/releases/download/v0.0.4.0/shc-linux-x64-8.0.1.tar.bz2
+  | tar -xj
+- "./shc slack-verify slack-verify-test"
 after_success:
 - stack install cabal-install
 
@@ -30,7 +29,7 @@ deploy:
   provider: hackage
   username: kkweon
   password:
-    secure: KHd4W2MLD/HYyr7MhHbZR64PssZANhPQsogSoPoAuawRLRo1uzIPuVTOKkQkC8p7oY1HwJ6kv8jbOJC6SPMZRe04YxvMaFwrT7so+sohW2cx6TS1VBOWUqZbjOKQgKmZCp6JLVRQr+mtKfJXVskLjAKDwLFhp8/yfbFzegkDqHJ1ph2Q0upL8KEZ/RGhmc0iDxntd7WC01TJG5GDexBR2mnVg685YKxgzBXGAUrk8y9NJn81p3K2VeGOGTuY2J3x2e1YJBxFqpORr4xm8CrFNVCx+/mWSr9i9UvVPHyBiKhGfypHsK7WOPbvUUoHnms3B2YTHddkM6xPdy8cSmQPcyN+YEp+s06mk6swwOQGWtGuEosHL7r4ZqRWZrvFE2CZ/7zspM2L9FlPHfQJVzhc/ncrzKJTwBBHI7DPSFJ30DwTGuP7c8l3+e2U8bxWLTlY8Kw7dAHhf2zK0rEr1xguPVx3ngzxwe1VOsxbh3cuS3WM2f5AL1Uq9Ddn7nnKgpkV+Jv1NTi72xHbrEdS1MxUywIE+IKtoKD7kq7F8bTz/me2JnLWBqXGjWi4MssDt2oruVCzg5UyaXNxHijZLOgSoayg6h4Sb+WcUN1qTzJXpeyvLhj3UNdfHbwHUzH5C2eEgaa9eeKfsXm0Ys6rA6UCnFaJYNR0WS8VFfBUnb0OFY4=
+    secure: XfHopU4oCRO9DejJVBNpyrRq8X3oMC+kv3b/mH/pW2sEZef4EHICM5c62LkgRfVswZEVLQJ4w15sMwe6+1wlIfqyYjHLyzpd+vWwvgnaMFT+EAWkVfA29U8IQa56QGsygU5RoOKMbXj6ZjnRoxk1ShCriVvutr4yBF54ch1Q08qEk/8u74duyHeMxJ9AQ1dT61qnAXmIM3Rq0xJ2iiPPsRCy3pon+WWviJ1nduurBaIiiSpYoxYkPzDrORB7et6XeXojH9Nd0v8xxslVY1rjo2I2OgpdaufEaLxIwSLPy3sv3RlHXlchyVAoFQc1K1t+z8N3G8BtaolHXPmhN/0RAa2A03cd6dJTmyFwBk1I0CmTZasXjDumUlt15pmgYfVs4POhII/UdRGaNrA0DQXdSwcAKFFqGafKHUYvI5F6sq7uRoBQzsy020/cnDN2yWFNlAgcdmgfud/HJwWn8wZpO3UwZv7QIi0qDp1Sier2W7YjjueSn3DEDH0xd83P5fDKMFmVrSnZckeO6YbHFtScFaNAS7nuH3GU0uqEfDBGTq90GI6Rgxnb29/Tf37zNZmf/Nl+mYydP37qImWO0QamWxT9RF0qho3fRZssrS49NBk3UnHb1yaQe6LeMXvb+CjyIN+I/XrawY2tKFZP5GY06wiU4+lgMCTP/x/Tla7dOb0=
   on:
     repo: kkweon/slack-verify-haskell
     branch: master
