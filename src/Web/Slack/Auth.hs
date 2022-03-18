@@ -68,8 +68,8 @@ verify (SlackSigningToken _token) (Timestamp ts) body (Hex _hex) = do
       _ -> Left $ WrongHex ("Unable to strip prefix v0= from " ++ show _hex)
   hexDecoded <-
     case decode normalizedHex of
-      (decoded, "") -> Right decoded
-      (_, x) -> Left $ WrongHex ("Failed to decode Hex" ++ show x)
+      Right decoded -> Right decoded
+      Left x -> Left $ WrongHex ("Failed to decode Hex" ++ show x)
   expectedHmac <-
     case digestFromByteString hexDecoded :: Maybe (Digest SHA256) of
       Just digest -> Right (HMAC digest)
